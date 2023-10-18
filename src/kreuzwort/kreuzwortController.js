@@ -18,4 +18,4 @@ class KreuzwortController extends Function {
 
 }
 
-export default new KreuzwortController;
+module.exports = new KreuzwortController;

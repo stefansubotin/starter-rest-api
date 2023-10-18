@@ -3,29 +3,82 @@ class KreuzwortMessager extends Function {
         super(props);
     }
 
-    messageUsers(quiz, users, room) {
-        const pusher = require("./kreuzwortAbly")
-        const quizOut = {
-            key: quiz.key,
-            lines: []
-        }
-        let userIndex = 0
-        for (let i = 0; i < quiz.lines.length; i++) {
-            let tmp = {
-                id: quiz.lines[i].id,
-                length: quiz.lines[i].answer.length,
-                msp: quiz.lines[i].msp,
-                user: users[userIndex++],
-                question: quiz.lines[i].question,
-                answer: quiz.lines[i].answer
-            }
-            quizOut.lines.push(tmp)
-            if (userIndex >= users.length) {
-                userIndex = 0
-            }
-        }
-        pusher(room, 'start', quizOut)
+    async messageStart(quiz, users, room) {
+        const kwAbly = require('./kreuzwortAbly');
+        const ably = kwAbly.getAbly();
+        const channel = kwAbly.getStarterChannel(ably, room);
 
-        return quizOut
+        const assignedUsers = this.assignUsersAtRandom(users.length, quiz.props.lines.length);
+        
+        for (let i = 0; i < users.length; i++){
+            let lines = [];
+            let userI = 0;
+            for (let j = 0; j < quiz.props.lines.length; j++){
+                let line = quiz.props.lines[j];
+                if (assignedUsers[userI] == i){
+                    lines.push({
+                        id: line.id,
+                        start: line.start,
+                        length: line.answer.length,
+                        user: users[assignedUsers[userI]],
+                        state: 0,
+                        question : line.question
+                    });
+                }
+                else {
+                    lines.push({
+                        id: line.id,
+                        start: line.start,
+                        length: line.answer.length,
+                        state: 0,
+                        user: users[assignedUsers[userI]]
+                    });
+                }
+            }
+            let body = {
+                game: 'kreuzwort',
+                data: {
+                    id: quiz.key,
+                    size: quiz.props.size,
+                    count: quiz.props.lines.length,
+                    msp: quiz.props.msp,
+                    lines: lines
+                }
+            }
+            await channel.publish('start' + users[i], body);
+            userI = (userI + 1) % users.length;
+        }
+
+        return quiz;
+    }
+
+    assignUsersAtRandom(userCount, questionCount) {
+        let res = [];
+        let buckets = [];
+        let perUser = questionCount / userCount;
+
+        for(let i = 0; i < userCount; i++) {
+            buckets.push(0);
+        }
+        for (let done = 0; done < questionCount; done++){
+            let r = this.getRandomInt(0, userCount - 1);
+            while (buckets[r] >= perUser){
+                r = (r + 1) % userCount;
+            }
+            res.push(r);
+            buckets[r] = buckets[r] + 1;
+        }
+        return res;
+    }
+
+    //Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random 
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max) + 1;
+        let res = Math.floor(Math.random() * (max - min) + min);
+        console.log('Random number between ' + min + ' and ' + (max - 1) + ': ' + res);
+        return res;
     }
 }
+
+module.exports = new KreuzwortMessager;

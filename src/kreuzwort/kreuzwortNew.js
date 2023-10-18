@@ -3,7 +3,7 @@ class KreuzwortNew extends Function {
         super(props)
     }
 
-    createNewKreuzwort(body) {
+    async createNewKreuzwort(body) {
         // const db = require("./kreuzwortDb")
         // const split = require("./kreuzwortNewSplitter")
         // let quiz = await db.getRandomQuiz(body.userCount)
@@ -14,3 +14,5 @@ class KreuzwortNew extends Function {
         }
     }
 }
+
+module.exports = new KreuzwortNew;

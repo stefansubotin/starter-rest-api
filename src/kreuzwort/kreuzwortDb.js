@@ -23,7 +23,8 @@ class KreuzwortDb extends Function {
                 filteredList.push(fullList.results[i]);
             }
         }
-
+        console.log('Filtered List:')
+        console.log(filteredList);
         return filteredList;
     }
 

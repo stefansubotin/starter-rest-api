@@ -15,6 +15,13 @@ class KreuzwortNew extends Function {
         const db = require('./kreuzwortDb')
         let allQuizes = await db.getFilteredList(userCount);
         let index = this.getRandomInt(0, allQuizes.length);
+        index = this.getRandomInt(0, allQuizes.length);
+        index = this.getRandomInt(0, allQuizes.length);
+        index = this.getRandomInt(0, allQuizes.length);
+        index = this.getRandomInt(0, allQuizes.length);
+        index = this.getRandomInt(0, allQuizes.length);
+        index = this.getRandomInt(0, allQuizes.length);
+        index = this.getRandomInt(0, allQuizes.length);
         let key = allQuizes[index].key;
         return await db.getItem(key);
     }

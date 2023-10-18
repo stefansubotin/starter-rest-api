@@ -23,7 +23,9 @@ class KreuzwortNew extends Function {
     getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min);
+        let res = Math.floor(Math.random() * (max - min) + min);
+        console.log('Random number between ' + min + ' and ' + max + ': ' + res);
+        return res;
     }
 }
 

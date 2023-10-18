@@ -11,7 +11,10 @@ class KreuzwortAbly extends Function{
         return ably;
     }
 
-    async getStarterChannel(ably, room){
+    async getStarterChannel(ably1, room){
+        const Ably = require('ably');
+        const ably = new Ably.Realtime.Promise('0sa0Qw.VDigAw:OeO1LYUxxUM7VIF4bSsqpHMSZlqMYBxN-cxS0fKeWDE');
+        await ably.connection.once('connected');
         let channelId = 'room' + room;
         const channel = ably.channels.get(channelId);
         return channel;

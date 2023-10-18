@@ -1,4 +1,4 @@
-class KreuzwortController extends Function(body) {
+class KreuzwortController extends Function {
     constructor(){
         //so far empty
     }

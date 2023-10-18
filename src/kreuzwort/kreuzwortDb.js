@@ -7,6 +7,7 @@ class KreuzwortDb extends Function {
 
     async getList() {
         const items = await db.collection('kreuzwort').list()
+        console.log(items);
         return items;
     }
 

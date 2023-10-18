@@ -14,7 +14,7 @@ class KreuzwortNew extends Function {
     async getRandomQuiz(userCount) {
         const db = require('./kreuzwortDb')
         let allQuizes = await db.getFilteredList(userCount);
-        let index = this.getRandomInt(0, allQuizes.length - 1);
+        let index = this.getRandomInt(0, allQuizes.length);
         let key = allQuizes[index].key;
         return await db.getItem(key);
     }
@@ -24,7 +24,7 @@ class KreuzwortNew extends Function {
         min = Math.ceil(min);
         max = Math.floor(max);
         let res = Math.floor(Math.random() * (max - min) + min);
-        console.log('Random number between ' + min + ' and ' + max + ': ' + res);
+        console.log('Random number between ' + min + ' and ' + (max - 1) + ': ' + res);
         return res;
     }
 }

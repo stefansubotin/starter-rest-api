@@ -1,45 +1,34 @@
-const express = require('express')
-const app = express()
-const db = require('@cyclic.sh/dynamodb')
+const express = require('express');
+const app = express();
+const db = require('@cyclic.sh/dynamodb');
 
+
+/*This is a built-in middleware function in Express. 
+It parses incoming requests with JSON payloads and is based on body-parser.*/
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// #############################################################################
-// This configures static hosting for files in /public that have the extensions
-// listed in the array.
-// var options = {
-//   dotfiles: 'ignore',
-//   etag: false,
-//   extensions: ['htm', 'html','css','js','ico','jpg','jpeg','png','svg'],
-//   index: ['index.html'],
-//   maxAge: '1m',
-//   redirect: false
-// }
-// app.use(express.static('public', options))
-// #############################################################################
+//Kreuzwort Abfangen
+app.post('/kreuzwort', async (req, res) =>{
+  const kreuzwortController = require('./src/kreuzwort/kreuzwortController');
+  const item = await kreuzwortController.parseCall(req.body);
+  res.json(item).end();
+})
 
-// Create or Update an item
-app.post('/:col/:key', async (req, res) => {
+
+app.post('/db/:col/:key', async (req, res) => {
   console.log(req.body)
 
   const col = req.params.col
   const key = req.params.key
   console.log(`from collection: ${col} delete key: ${key} with params ${JSON.stringify(req.params)}`)
   const item = await db.collection(col).set(key, req.body)
-  console.log(req.body)
   console.log(JSON.stringify(item, null, 2))
   res.json(item).end()
 })
 
-app.post('/kreuzwort', async (req, res) =>{
-  const kreuzwortController = require('./src/kreuzwortController').default
-  const item = await kreuzwortController(req.body)
-  res.json(item).end()
-})
-
 // Delete an item
-app.delete('/:col/:key', async (req, res) => {
+app.delete('/db/:col/:key', async (req, res) => {
   const col = req.params.col
   const key = req.params.key
   console.log(`from collection: ${col} delete key: ${key} with params ${JSON.stringify(req.params)}`)
@@ -49,7 +38,7 @@ app.delete('/:col/:key', async (req, res) => {
 })
 
 // Get a single item
-app.get('/:col/:key', async (req, res) => {
+app.get('/db/:col/:key', async (req, res) => {
   const col = req.params.col
   const key = req.params.key
   console.log(`from collection: ${col} get key: ${key} with params ${JSON.stringify(req.params)}`)
@@ -59,7 +48,7 @@ app.get('/:col/:key', async (req, res) => {
 })
 
 // Get a full listing
-app.get('/:col', async (req, res) => {
+app.get('/db/:col', async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()

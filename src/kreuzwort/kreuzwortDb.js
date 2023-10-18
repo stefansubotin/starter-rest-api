@@ -6,7 +6,8 @@ class KreuzwortDb extends Function {
     }
 
     async getList() {
-        const items = await db.collection('kreuzwort').list()
+        const items = await db.collection('kreuzwort').list();
+        console.log('Full List');
         console.log(items);
         return items;
     }
@@ -15,7 +16,10 @@ class KreuzwortDb extends Function {
         let fullList = await this.getList();
         let filteredList = [];
         for (let i = 0; i < fullList.length; i++) {
-            if (fullList.results[i].props.userCount == userCount){
+            let item = await this.getItem(fullList.results[i].key);
+            console.log('item: ' + i);
+            console.log(item);
+            if (item.props.userCount == userCount){
                 filteredList.push(fullList[i]);
             }
         }

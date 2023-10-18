@@ -14,10 +14,9 @@ class KreuzwortNew extends Function {
     async getRandomQuiz(userCount) {
         const db = require('./kreuzwortDb')
         let allQuizes = await db.getFilteredList(userCount);
-        return allQuizes;
-        // let index = this.getRandomInt(0, allQuizes.length - 1);
-        // let key = allQuizes[index].key;
-        // return await db.getItem(key);
+        let index = this.getRandomInt(0, allQuizes.length - 1);
+        let key = allQuizes[index].key;
+        return await db.getItem(key);
     }
 
     //Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random 

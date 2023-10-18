@@ -19,7 +19,7 @@ class KreuzwortDb extends Function {
             let item = await this.getItem(fullList.results[i].key);
             console.log('item: ' + i);
             console.log(item);
-            if (item.props.userCount == userCount){
+            if (item.props.userCount % userCount == 0){
                 filteredList.push(fullList.results[i]);
             }
         }

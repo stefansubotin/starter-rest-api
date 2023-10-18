@@ -15,7 +15,7 @@ class KreuzwortDb extends Function {
     async getFilteredList(userCount){
         let fullList = await this.getList();
         let filteredList = [];
-        for (let i = 0; i < fullList.length; i++) {
+        for (let i = 0; i < fullList.results.length; i++) {
             let item = await this.getItem(fullList.results[i].key);
             console.log('item: ' + i);
             console.log(item);

@@ -55,6 +55,21 @@ class KreuzwortMessager extends Function {
         return quiz;
     }
 
+    async messageCorrection(i, state, room){
+        const kwAbly = require('./kreuzwortAbly');
+        const Ably = require('ably');
+        const ably = new Ably.Realtime.Promise('0sa0Qw.VDigAw:OeO1LYUxxUM7VIF4bSsqpHMSZlqMYBxN-cxS0fKeWDE');
+        await ably.connection.once('connected');
+        let channelId = kwAbly.getCorrectionChannelId(room);
+        const channel = ably.channels.get(channelId);
+        let body = {
+            i: i, 
+            state: state
+        }
+        channel.publish('correction', body);
+        ably.close();
+    }
+
     assignUsersAtRandom(userCount, questionCount) {
         let res = [];
         let buckets = [];

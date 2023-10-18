@@ -15,7 +15,7 @@ class KreuzwortDb extends Function {
         let fullList = await this.getList();
         let filteredList = [];
         for (let i = 0; i < fullList.length; i++) {
-            if (fullList[i].props.userCount == userCount){
+            if (fullList.results[i].props.userCount == userCount){
                 filteredList.push(fullList[i]);
             }
         }

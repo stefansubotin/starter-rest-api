@@ -20,7 +20,7 @@ class KreuzwortDb extends Function {
             console.log('item: ' + i);
             console.log(item);
             if (item.props.userCount == userCount){
-                filteredList.push(fullList[i]);
+                filteredList.push(fullList.results[i]);
             }
         }
 

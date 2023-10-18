@@ -1,6 +1,6 @@
 class KreuzwortController extends Function {
-    constructor(){
-        //so far empty
+    constructor(props){
+        super(props);
     }
 
     async parseCall(body){

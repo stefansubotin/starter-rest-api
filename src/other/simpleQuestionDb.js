@@ -7,6 +7,8 @@ class SimpleQuestionDb extends Function {
 
     async getWwmList(){
         let full = await this.getFullList();
+        console.log('fullList');
+        console.log(full);
         let results = [];
         for (let i = 0; i < full.results.length; i++){
             let item = await this.getItem(full.results[i].key);

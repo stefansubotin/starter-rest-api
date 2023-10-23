@@ -19,7 +19,7 @@ class TabooCreator extends Function {
             let scramble = await this.getRandomIndexes(3, 4);
             let answers = [];
             let correct;
-            console.log(question[i]);
+            console.log(questions[i]);
             for (let j = 0; j < scramble.length; j++) {
                 switch (scramble[j]) {
                     case 0:

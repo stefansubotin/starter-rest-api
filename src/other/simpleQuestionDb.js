@@ -20,6 +20,7 @@ class SimpleQuestionDb extends Function {
     async getItem(key) {
         const db = require('./database');
         const item = await db.getItem('simpleQuestion', key);
+        return item;
     }
 }
 

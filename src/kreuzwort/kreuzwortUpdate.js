@@ -4,16 +4,18 @@ class KreuzwortUpdate extends Function {
     }
 
     async checkAnswer(body){
-        const messager = require("./kreuzwortMessager");
+        const messenger = require("./kreuzwortMessenger");
         const db = require('./kreuzwortDb');
         let quiz = await db.getItem(body.id);
-        const state = this.getState(quiz.props.lines[body.line - 1], body.answer);
-        await messager.messageCorrection(body.line, state, body.room);
+        const state = this.getState(quiz.props.lines[body.line].answer, body.answer);
+        await messenger.messageCorrection(body.line, state, body.room);
         return 'Done!';
     }
 
     getState(line, answer){
-        if (line.answer == answer) return 1;
+        console.log(line);
+        console.log(answer);
+        if (line.toLowerCase() == answer.toLowerCase()) return 1;
         return -1;
     }
 }

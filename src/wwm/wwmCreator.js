@@ -26,6 +26,7 @@ class TabooCreator extends Function {
                     case 0:
                         console.log(0);
                         answers.push(questions[i].props.answer);
+                        console.log(answers);
                         correct = i;
                         break;
                     case 1:
@@ -48,6 +49,7 @@ class TabooCreator extends Function {
                 correct: correct
             })
         }
+        console.log(quiz);
         return quiz;
     }
 

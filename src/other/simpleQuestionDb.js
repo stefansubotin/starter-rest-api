@@ -15,7 +15,7 @@ class SimpleQuestionDb extends Function {
             console.log(item);
             if (item.props.answerCount == 4) {
                 console.log('added item')
-                results.push(full.results[i].key);
+                results.push(full.results[i]);
             }
         }
         console.log(results);

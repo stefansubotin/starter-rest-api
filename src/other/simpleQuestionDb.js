@@ -11,7 +11,7 @@ class SimpleQuestionDb extends Function {
         for (let i = 0; i < full.results.length; i++){
             let item = await this.getItem(full.results[i].key);
             if (item.props.answerCount == 4) {
-                results.push(item);
+                results.push(full.results[i].key);
             }
         }
         return results;

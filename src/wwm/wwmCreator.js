@@ -27,7 +27,7 @@ class TabooCreator extends Function {
                         console.log(0);
                         answers.push(questions[i].props.answer);
                         console.log(answers);
-                        correct = i;
+                        correct = j;
                         break;
                     case 1:
                         console.log(1);

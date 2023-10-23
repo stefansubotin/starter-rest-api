@@ -11,7 +11,7 @@ class TabooCreator extends Function {
 
         let questions = [];
         for (let i = 0; i < indexes.length; i++) {
-            questions.push(db.getItem(list[indexes[i]].key));
+            questions.push(await db.getItem(list[indexes[i]].key));
         }
         let quiz = [];
 

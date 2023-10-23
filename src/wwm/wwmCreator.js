@@ -7,7 +7,7 @@ class TabooCreator extends Function {
         const db = require('../other/simpleQuestionDb');
         let list = await db.getWwmList();
         console.log(list);
-        let indexes = this.getRandomIndexes(list.length - 1, 10);
+        let indexes = await this.getRandomIndexes(list.length - 1, 10);
 
         let questions = [];
         for (let i = 0; i < indexes.length; i++) {
@@ -16,9 +16,10 @@ class TabooCreator extends Function {
         let quiz = [];
 
         for (let i = 0; i < indexes.length; i++) {
-            let scramble = this.getRandomIndexes(3, 4);
+            let scramble = await this.getRandomIndexes(3, 4);
             let answers = [];
             let correct;
+            console.log(question[i]);
             for (let j = 0; j < scramble.length; j++) {
                 switch (scramble[j]) {
                     case 0:
@@ -45,7 +46,7 @@ class TabooCreator extends Function {
         return quiz;
     }
 
-    getRandomIndexes(max, num) {
+    async getRandomIndexes(max, num) {
         const randomizer = require('../other/randomInt');
 
         let indexes = [];

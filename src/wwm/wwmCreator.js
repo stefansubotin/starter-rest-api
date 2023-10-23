@@ -52,7 +52,8 @@ class TabooCreator extends Function {
         for (let i = 0; i < num && i < max; i++) {
             let r = randomizer.getRandomInt(0, max);
             while (this.checkForIndex(r, indexes)) {
-                console.log(r + ' bereits vorhanden');
+                console.log(r + ' bereits vorhanden, i ' + i + ', max:' + max + ', num: ' + num);
+                console.log(indexes);
                 r = (r + 1) % (max + 1);
             }
             indexes.push(r);

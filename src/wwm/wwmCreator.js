@@ -3,9 +3,9 @@ class TabooCreator extends Function {
         super(props);
     }
 
-    createQuiz() {
+    async createQuiz() {
         const db = require('../other/simpleQuestionDb');
-        let list = db.getWwmList();
+        let list = await db.getWwmList();
         console.log(list);
         let indexes = this.getRandomIndexes(list.length - 1, 10);
 

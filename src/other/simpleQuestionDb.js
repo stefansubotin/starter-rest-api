@@ -1,7 +1,10 @@
+const db = require('./database');
+
 class SimpleQuestionDb extends Function {
     async getFullList() {
-        const db = require('./database');
         const items = await db.getFullList('simpleQuestion');
+        console.log('Full List');
+        console.log(items);
         return items;
     }
 
@@ -23,7 +26,6 @@ class SimpleQuestionDb extends Function {
     }
 
     async getItem(key) {
-        const db = require('./database');
         const item = await db.getItem('simpleQuestion', key);
         return item;
     }

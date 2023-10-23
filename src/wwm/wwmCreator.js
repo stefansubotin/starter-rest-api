@@ -6,7 +6,7 @@ class TabooCreator extends Function {
     createQuiz() {
         const db = require('../other/simpleQuestionDb');
         let list = db.getWwmList();
-        console.log(list);
+        console.log(list.length);
         let indexes = this.getRandomIndexes(list.length - 1, 10);
 
         let questions = [];

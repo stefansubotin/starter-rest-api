@@ -17,22 +17,27 @@ class TabooCreator extends Function {
 
         for (let i = 0; i < indexes.length; i++) {
             let scramble = await this.getRandomIndexes(3, 4);
+            console.log(scramble);
             let answers = [];
             let correct;
             console.log(questions[i]);
             for (let j = 0; j < scramble.length; j++) {
                 switch (scramble[j]) {
                     case 0:
+                        console.log(0);
                         answers.push(questions[i].props.answer);
                         correct = i;
                         break;
                     case 1:
+                        console.log(1);
                         answers.push(questions[i].props.falseAnswer1);
                         break;
                     case 2:
+                        console.log(2);
                         answers.push(questions[i].props.falseAnswer2);
                         break;
                     case 3:
+                        console.log(3);
                         answers.push(questions[i].props.falseAnswer3);
                         break;
                 }
@@ -53,7 +58,7 @@ class TabooCreator extends Function {
         for (let i = 0; i < num && i < max; i++) {
             let r = randomizer.getRandomInt(0, max);
             while (this.checkForIndex(r, indexes)) {
-                console.log(r + ' bereits vorhanden, i ' + i + ', max:' + max + ', num: ' + num);
+                console.log(r + ' bereits vorhanden, i: ' + i + ', max: ' + max + ', num: ' + num);
                 console.log(indexes);
                 r = (r + 1) % (max + 1);
             }

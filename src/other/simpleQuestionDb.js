@@ -10,10 +10,13 @@ class SimpleQuestionDb extends Function {
         let results = [];
         for (let i = 0; i < full.results.length; i++){
             let item = await this.getItem(full.results[i].key);
+            console.log(item);
             if (item.props.answerCount == 4) {
+                console.log('added item')
                 results.push(full.results[i].key);
             }
         }
+        console.log(results);
         return results;
     }
 

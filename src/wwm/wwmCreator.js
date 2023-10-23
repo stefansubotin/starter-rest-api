@@ -49,7 +49,7 @@ class TabooCreator extends Function {
         const randomizer = require('../other/randomInt');
 
         let indexes = [];
-        for (let i = 0; i < num; i++) {
+        for (let i = 0; i < num && i < max; i++) {
             let r = randomizer.getRandomInt(0, max);
             while (this.checkForIndex(r, indexes)) {
                 console.log(r + ' bereits vorhanden');
